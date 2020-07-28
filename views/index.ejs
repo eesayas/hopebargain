@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="bg-orange-500">
+    <div class="h-full" id="HOME-PAGE">
+      <nav class="flex items-center bg-white p-10 h-48">
+        <div class="flex items-center flex-shrink-0 mr-1">
+          <img class="fill-current h-32" src='./images/og-image.png'/>
+        </div>
+        <div class="ml-auto">
+          <div class="font-bold text-lg">Hope Bargain Shoppe and Donation Centre</div>
+          <div class="text-s">SHOP TO GIVE</div>
+          <div>Crossroads Business Centre</div>
+          <div>2403 Ellwood Drive SW T6X 0J6</div>
+          <div>780 485 6888 / 780 422 2018 ext. 300</div>
+          <div>Donation Hours: &nbsp; Mon-Fri, 9:00 am - 4:00 pm, Back Door</div>
+          <div>Store Hours: &nbsp; Mon-Fri, 9:00 am - 4:00 pm, Front Door</div>
+        </div>
+      </nav>
+      <div class="flex text-white justify-center items-center" style="height: calc(100% - 12rem) !important;">
+        <div class="table mr-10 ml-10">
+          <span>Dear Customer,</span><br>
+          We respect the social distancing measures and managing people's flow into our store for everybody's safety.<br>
+          Therefore, we ask you to book a time slot for your arrival.<br>
+          Keep safe!<br><br>
+          <div class="flex">
+            <button class="bg-orange-700 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded ml-auto" id="BOOK-BTN">
+              BOOK TIME
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--THIS ARE THE SHOPPING TIME GUIDELINES AND PROCEDURES-->
+    <div>
+      hello
+    </div>
+  </body>
+  <script>
+    let bookBtn = document.getElementById('BOOK-BTN');
+    let homePage = document.getElementById('HOME-PAGE');
+    bookBtn.addEventListener('click', () => {
+      homePage.classList.add('hidden');
+    });
+  </script>
+</html>
