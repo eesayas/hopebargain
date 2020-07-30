@@ -2,49 +2,68 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   </head>
-  <body class="bg-orange-500">
-    <div class="h-full" id="HOME-PAGE">
-      <nav class="flex items-center bg-white p-10 h-48">
-        <div class="flex items-center flex-shrink-0 mr-1">
-          <img class="fill-current h-32" src='./images/og-image.png'/>
-        </div>
-        <div class="ml-auto">
-          <div class="font-bold text-lg">Hope Bargain Shoppe and Donation Centre</div>
-          <div class="text-s">SHOP TO GIVE</div>
-          <div>Crossroads Business Centre</div>
-          <div>2403 Ellwood Drive SW T6X 0J6</div>
-          <div>780 485 6888 / 780 422 2018 ext. 300</div>
-          <div>Donation Hours: &nbsp; Mon-Fri, 9:00 am - 4:00 pm, Back Door</div>
-          <div>Store Hours: &nbsp; Mon-Fri, 9:00 am - 4:00 pm, Front Door</div>
-        </div>
-      </nav>
-      <div class="flex text-white justify-center items-center" style="height: calc(100% - 12rem) !important;">
-        <div class="table mr-10 ml-10">
-          <span>Dear Customer,</span><br>
-          We respect the social distancing measures and managing people's flow into our store for everybody's safety.<br>
-          Therefore, we ask you to book a time slot for your arrival.<br>
-          Keep safe!<br><br>
-          <div class="flex">
-            <button class="bg-orange-700 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded ml-auto" id="BOOK-BTN">
-              BOOK TIME
-            </button>
-          </div>
+  <body class="bg-hope font-sans">
+    <% include ./navbar %>
+    <div class="flex justify-center items-center bg-white h-64" style="padding: 12rem 0 !important;">
+      <div class="table font-bold text-hope mx-20">
+        <div>Dear Customer,</div>
+        <div>We respect the social distancing measures and managing people's flow into our store for everybody's safety.</div>
+        <div>Therefore, we ask you to book a time slot for your arrival.</div>
+        <br>
+        <div>Keep safe!</div>
+        <br>
+        <div class="w-full flex justify-center">
+          <button class="bg-hope hover:bg-orange-500 text-white font-bold py-2 px-5 w-64 mx-auto" id="BOOK-TIME-BUTTON">
+            BOOK TIME
+          </button>
         </div>
       </div>
     </div>
-
-    <!--THIS ARE THE SHOPPING TIME GUIDELINES AND PROCEDURES-->
-    <div>
-      hello
+    <!-- THIS IS THE FOOTER -->
+    <div class="flex justify-center items-center bg-hope h-64" style="padding: 10rem 0">
+      <div class="table text-white letter tracking-wide">
+        <div class="font-bold text-center">Hope Bargain Shoppe and Donation Centre</div>
+        <div class="text-center">SHOP TO GIVE</div>
+        <br>
+        <div class="text-center">Crossroads Business Centre</div>
+        <div class="text-center">2403 Ellwood Drive SW T6X 0J6</div>
+        <div class="text-center">780 485 6888 / 780 422 2018 ext. 300</div>
+        <br>
+        <div class="text-center">Donation Hours:   Mon-Fri, 9:00 am - 4:00 pm, Back Door</div>
+        <div class="text-center">Store Hours:   Mon-Fri, 9:00 am - 4:00 pm, Front Door</div>
+      </div>
+    </div>
+    <!-- THIS IS THE MODAL toggle opacity-0 to show/hide modal-->
+    <div class="opacity-0 pointer-events-none absolute w-full h-full top-0 left-0 flex justify-center rounded-lg" id="MODAL">
+      <!-- THIS IS THE MODAL BACKGROUND-->
+      <div class="absolute w-full h-full bg-black opacity-50 top-0 left-0 cursor-pointer"></div>
+      <!-- THIS IS THE MODAL CONTENT -->
+      <div class="absolute md:w-1/2 sm:w-3/4 h-auto bg-white rounded-sm shadow-lg flex flex-col justify-center mt-10 py-8 ">
+        <div class="top-0 w-auto flex mx-10">
+          <span class="font-medium">Shopping Time Guidelines and Procedures</span>
+          <span class="material-icons ml-auto" style="cursor: pointer !important;" id="CLOSE-MODAL">close</span>
+        </div>
+        <br>
+        <div class="mx-10">
+          <ol>
+            <li>1. Make sure to register all individuals that will be present.</li>
+            <li>2. All time slots are 1 hour and 30 minutes in length.</li>
+            <li>3. There is a limit of 6 person per time slot. Therefore, early registrations are better.</li>
+            <li>4. Every registration must provide at least one phone number.</li>
+          </ol> 
+        </div>
+        <br>
+        <div class="w-auto flex mx-10">
+          <button class="bg-hope hover:bg-orange-500 text-white font-bold py-2 px-5 w-64 ml-auto" id="REGISTER-BUTTON">
+            REGISTER
+          </button>
+        </div>
+      </div>
     </div>
   </body>
-  <script>
-    let bookBtn = document.getElementById('BOOK-BTN');
-    let homePage = document.getElementById('HOME-PAGE');
-    bookBtn.addEventListener('click', () => {
-      homePage.classList.add('hidden');
-    });
-  </script>
+  <script type="text/javascript" src="/javascripts/index.js"></script>
 </html>
