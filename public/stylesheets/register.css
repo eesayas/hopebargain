@@ -1,0 +1,65 @@
+.calendar-cont{
+    margin: 0 auto;
+    padding: 1rem 0;
+    width: 50%;
+}
+
+.clndr-cont{
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.clndr-controls{
+    display: flex !important;
+    width: 80%;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.clndr-previous-button, .clndr-next-button{
+    cursor: pointer !important;
+    display: table;
+    margin: auto 0;
+}
+
+.header-cont{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin: 1rem 0;
+}
+
+.header-day{
+    text-align: center;
+}
+
+.days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    cursor: pointer;
+}
+
+.past, .calendar-dow-0, .calendar-dow-6{
+    pointer-events: none;
+    color: #969696;
+}
+
+.day{
+    text-align: center;
+    margin: 0.8rem 0;
+}
+
+.select-day{
+    background: #ec6715;
+    color: white;
+    border-radius: 50%;
+}
+
+.day-inner{
+    
+
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    margin: 0 auto;
+}

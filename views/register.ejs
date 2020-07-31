@@ -8,14 +8,65 @@
     <script src="/javascripts/moment.min.js"></script>
     <script src="/javascripts/underscore.min.js"></script>
     <script src="/javascripts/clndr.min.js"></script>
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="/stylesheets/register.css"/>
+
   </head>
   <body class="bg-hope font-sans">
     <% include ./navbar %>
-    <div class="h-64 bg-white calendar-cont">
+    <div class="bg-white registration">
+      <br>
+      <div class="text-center text-3xl text-hope">Select a day from the calendar</div>
+      <br>
+      <div class="calendar-cont"></div>
+      <!-- THIS IS CUSTOM TEMPLATE FOR CLNDR.JS -->
+      <script id="calendar-template" type="text/template">
+        <div class="clndr-cont" id="clndr-cont">
+          <div class="clndr-controls">
+            <div class="clndr-previous-button material-icons">chevron_left</div>
+            <div class="month">{{ month }} {{ year }}</div>
+            <div class="clndr-next-button material-icons">chevron_right</div>
+          </div>
+          <div class="clndr-grid">
+            <div class="days-of-the-week">
+              <div class="header-cont">
+                {% _.each(daysOfTheWeek, function (day) { %}
+                  <div class="header-day">{{ day }}</div>
+                {% }) %}
+              </div>
+              <div class="days">
+              {% _.each(days, function (day) { %}
+                <div class="{{ day.classes }}">
+                  <div class="day-inner">{{ day.day }}</div>
+                </div>
+              {% }) %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </script>
+      <br>
+      <!-- THIS WILL SHOW THE TIME SLOTS -->
+      <div id="time-slots" class="hidden">
+        <div class="text-center text-3xl text-hope">Select a time for <span id="selected-date"></span></div>
+        <br>
+        <div class="flex mx-auto w-3/4" style="flex-wrap: wrap;">
+          <% ['9:00am-10:30am', '10:30am-12:00pm', "12:00pm-1:30pm", "1:30pm-3:00pm", "3:00pm-4:30pm"].forEach(time => { %>
+            <div style="flex-basis: calc(100%/3); text-align: center;" class="my-2">
+              <button class="bg-white hover:bg-hope text-hope font-semibold hover:text-white py-3 px-6 border border-hope hover:border-transparent text-lg w-64">
+                <%=time%>
+              </button>
+            </div>
+          <% }) %>
+        </div>
+        <br>
+      </div>
+      <!-- THIS IS THE FORM FOR CONTACT INFO -->
+      <div>
+        
+      </div>
+
     </div>
   </body>
+  
   <script type="text/javascript" src="/javascripts/register.js"></script>
 </html>
