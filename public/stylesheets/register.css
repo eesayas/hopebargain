@@ -55,11 +55,17 @@
 }
 
 .day-inner{
-    
-
     width: 2.5rem;
     height: 2.5rem;
     line-height: 2.5rem;
     text-align: center;
     margin: 0 auto;
+}
+
+.disabled-time{
+    background-color: #808080 !important;
+    cursor: not-allowed !important;
+    color: white;
+    opacity: 50%;
+    border: none !important;
 }
