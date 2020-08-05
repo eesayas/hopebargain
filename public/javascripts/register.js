@@ -18,6 +18,11 @@ $('.calendar-cont').clndr({
         click: function(target){
             if(!Array.from(target.element.classList).includes('select-day')){
 
+                //reset companion records
+                $('#companions').prop('checked', false);
+                $('#companion-form').empty();
+                $('#companion-records').addClass('hidden');
+
                 let date = target.date._d.getTime();
 
                 $.get(`/available/${date}`, function(data){
@@ -42,7 +47,6 @@ $('.calendar-cont').clndr({
                 //change selected date like state change
                 $('#selected-date').text(moment(target.date._d).format('MMMM DD'));
                 $('#time-slots').removeClass('hidden'); //show slots
-
 
                 //scroll to view
                 let timeSlots = document.getElementById('time-slots');
@@ -102,15 +106,18 @@ $('form').submit(function(event){
     let companionFirstNames = formData.filter(data => data.name === "companion-first-name[]");
     let companionLastNames = formData.filter(data => data.name === "companion-last-name[]");
 
-    let companion = {
-        firstName: companionFirstNames[0].value,
-        lastName: companionLastNames[0].value
+    for(let i = 0; i < $('#companion-form > div').length; i++){
+        let companion = {
+            firstName: companionFirstNames[i].value,
+            lastName: companionLastNames[i].value
+        }
+
+        if(companion.firstName !== "" || companion.lastName !== "") companions.push(companion);
     }
-
-    companions.push(companion);
-
+    
     submission = {...submission, date: dateSubmission, time: timeSubmission, timeIndex: timeIndexSubmission, companions: companions};
 
+    console.log(submission);
     $.post("/register", {data: JSON.stringify(submission)});
 });
 
@@ -120,18 +127,20 @@ $('#companions').change(function(){
     //if customer is not alone
     if($('#companions').prop('checked')){
 
-        //append companion form 
+        $('select').val(1);
         $('#companion-form').empty();
+
+        //append companion form 
         $('#companion-form').append(
             `
-            <div class="w-full flex">
-                <div class="w-1/2 px-3">
+            <div class="w-full sm:flex-row flex-col flex">
+                <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-first-name">
                     COMPANION #1
                   </label>
                   <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
                 </div>
-                <div class="w-1/2 px-3">
+                <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-last-name">
                     &nbsp;
                   </label>
@@ -149,6 +158,7 @@ $('#companions').change(function(){
 
 
     } else{
+        $('#companion-form').empty();
         $('#companion-records').addClass('hidden');
     }
 });
@@ -160,20 +170,21 @@ $('select').on('change', function(){
 });
 
 const updateCompanions = () => {
+
     $('#companion-form').empty(); //clear companion forms first
 
     let pop = $('select').val(); //pop => population (how many companions)
     for(let i = 1; i <= pop; i++){
         $('#companion-form').append(
             `
-            <div class="w-full flex">
-                <div class="w-1/2 px-3">
+            <div class="w-full sm:flex-row flex-col flex">
+                <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                     COMPANION #${i}
                   </label>
                   <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter First Name" name="companion-first-name[]">
                 </div>
-                <div class="w-1/2 px-3">
+                <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                     &nbsp;
                   </label>
