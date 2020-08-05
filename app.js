@@ -8,14 +8,14 @@ const passport = require('passport');
 const session = require('express-session');
 const User = require('./models/user');
 
+//require routes
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
-const { truncateSync } = require('fs');
 
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/hopebargain', {
-  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: truncateSync
+  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
 });
 
 const db = mongoose.connection;

@@ -99,4 +99,14 @@ router.post('/login', (req, res, next) => {
   }) (req, res, next);
 });
 
+/*
+@route  GET /logout
+@desc   Logouts a user
+@access Public
+*/
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 module.exports = router;
