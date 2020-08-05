@@ -4,6 +4,7 @@ const _ = require('lodash');
 const Slot = require('../models/slot');
 const passport = require('passport');
 const User = require('../models/user');
+const e = require('express');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,14 +29,15 @@ router.post('/register', async (req, res) => {
   const data = JSON.parse(req.body.data);
   try{
     const slots = await Slot.find({date: data.date, firstName: data.firstName, lastName: data.lastName, phoneNumber: data.phoneNumber});
-    if(slots.length) throw Error("You can't book multiple slots");
+    if(slots.length) throw Error("You can't book multiple slots on the same day");
     
     const slot = await Slot.create(data);
-    if(!slot) throw Error('Something went wrong while creating slot');
+    if(!slot) throw Error('Something went wrong. Please try again.');
 
-    res.status(200).json({success: true});
+    res.status(200).json({success: true, slot});
   } catch(e){
-    res.status(400).json({msg: e.message});
+    // console.log(e);
+    res.status(400).json({success: false, msg: e.message});
   }
 })
 

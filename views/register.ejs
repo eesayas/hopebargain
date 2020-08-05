@@ -70,32 +70,37 @@
             <br>
             <div class="w-full sm:flex-row flex-col flex">
               <div class="w-full sm:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="first-name">
                   First Name
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" placeholder="Enter First Name" name="firstName">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="first-name" type="text" placeholder="Enter First Name" name="firstName">
+                <p class="hidden text-red-500 text-xs italic empty-error">Enter first name</p>
               </div>
               <div class="w-full sm:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="last-name">
                   Last Name
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Enter Last Name" name="lastName">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="last-name" type="text" placeholder="Enter Last Name" name="lastName">
+                <p class="hidden text-red-500 text-xs italic empty-error">Enter last name</p>
               </div>
             </div>
             <br>
             <div class="w-full">
               <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="phone-number">
                   Phone Number
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Enter Phone Number" name="phoneNumber">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="phone-number" type="text" placeholder="Enter Phone Number" name="phoneNumber">
+                <p class="hidden text-red-500 text-xs italic empty-error">Enter phone number</p>
               </div>
+              <br>
               <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email-address">
                   Email Address <span>(optional)</span>
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Enter Email Address (optional)" name="emailAddress">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email-address" type="text" placeholder="Enter Email Address (optional)" name="emailAddress">
               </div>
+              <br>
               <label class="text-gray-700 px-3">
                 <input class="mr-2 leading-tight" type="checkbox" id="companions">
                 <span class="text-sm">
@@ -126,12 +131,41 @@
             <button class="bg-transparent hover:bg-hope text-hope font-semibold hover:text-white py-2 px-4 border border-hope hover:border-transparent rounded mr-3">
               SUBMIT
             </button>
-            <button class="bg-transparent hover:bg-gray-700 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded">
+            <a href="/" class="bg-transparent hover:bg-gray-700 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded">
               CANCEL
-            </button>
+            </a>
           </div>
         </form>   
         <br>     
+      </div>
+    </div>
+
+    <!-- THIS IS THE MODAL FOR WHEN USER SUBMITS DATA -->
+    <div class="hidden fixed w-full h-full flex justify-center top-0 left-0" id="MODAL">
+      <!-- MODAL BACKGROUND -->
+      <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+      </div>
+      <!-- MODAL CONTENT -->
+      <div class="absolute md:w-1/2 sm:w-3/4 h-auto bg-white rounded-sm shadow-lg flex flex-col justify-center my-10 py-8" id="MODAL-CONTENT">
+        <div class="spinner"></div>
+
+        <!-- <div class="text-center text-green-600 font-bold text-3xl mx-10">You are booked successfully for July 17, 2020 <br> at 10:30am-12:00pm</div>
+        <br>
+        <div class="flex mx-10">
+          <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-auto" href="/">
+            OKAY
+          </a>
+        </div> -->
+
+        <!-- <div class="text-center text-red-600 font-bold text-3xl mx-10">Something went wrong. Please try again.</div>
+        <br>
+        <div class="flex mx-10">
+          <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-auto" id="GO-BACK">
+            GO BACK
+          </button>
+        </div> -->
+
       </div>
     </div>
   </body>

@@ -1,6 +1,45 @@
 <nav class="flex items-center bg-hope p-10 h-auto sm:h-10">
     <a href="/" class="text-white font-bold text-lg cursor-pointer" id="LOGO">Hope Bargain Shoppe and Donation Centre</a>
-    <button class="bg-white hover:bg-gray-300 text-hope font-bold py-2 px-4 ml-auto">
+    <button class="bg-white hover:bg-gray-300 text-hope font-bold py-2 px-4 ml-auto" id="CONTACT-US">
       CONTACT US
     </button>
 </nav>
+
+<!-- THIS IS THE MODAL toggle opacity-0 to show/hide modal-->
+<div class="opacity-0 pointer-events-none absolute w-full h-full top-0 left-0 flex justify-center rounded-lg" id="CONTACT-US-MODAL">
+  <!-- THIS IS THE MODAL BACKGROUND-->
+  <div class="fixed inset-0 transition-opacity">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+  </div>
+  <!-- THIS IS THE MODAL CONTENT -->
+  <div class="absolute md:w-1/2 sm:w-3/4 h-auto bg-white rounded-sm shadow-lg flex flex-col justify-center mt-10 py-8 ">
+    <div class="top-0 w-auto flex mx-10">
+      <span class="material-icons ml-auto" style="cursor: pointer !important;" id="CONTACT-US-CLOSE">close</span>
+    </div>
+    <div class="flex justify-center items-center bg-white h-64">
+      <div class="table text-hope letter tracking-wide">
+        <div class="font-bold text-center">Hope Bargain Shoppe and Donation Centre</div>
+        <div class="text-center">SHOP TO GIVE</div>
+        <br>
+        <div class="text-center">Crossroads Business Centre</div>
+        <div class="text-center">2403 Ellwood Drive SW T6X 0J6</div>
+        <div class="text-center">780 485 6888 / 780 422 2018 ext. 300</div>
+        <br>
+        <div class="text-center">Donation Hours:   Mon-Fri, 9:00 am - 4:00 pm, Back Door</div>
+        <div class="text-center">Store Hours:   Mon-Fri, 9:00 am - 4:00 pm, Front Door</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#CONTACT-US').on('click', function(){
+    $('#CONTACT-US-MODAL').removeClass('opacity-0');
+    $('#CONTACT-US-MODAL').removeClass('pointer-events-none');
+  });
+
+  $('#CONTACT-US-CLOSE').on('click', function(){
+    $('#CONTACT-US-MODAL').addClass('opacity-0');
+    $('#CONTACT-US-MODAL').addClass('pointer-events-none');
+  });
+</script>

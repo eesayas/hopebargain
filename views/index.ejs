@@ -41,7 +41,9 @@
     <!-- THIS IS THE MODAL toggle opacity-0 to show/hide modal-->
     <div class="opacity-0 pointer-events-none absolute w-full h-full top-0 left-0 flex justify-center rounded-lg" id="MODAL">
       <!-- THIS IS THE MODAL BACKGROUND-->
-      <div class="absolute w-full h-full bg-black opacity-50 top-0 left-0 cursor-pointer"></div>
+      <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+      </div>
       <!-- THIS IS THE MODAL CONTENT -->
       <div class="absolute md:w-1/2 sm:w-3/4 h-auto bg-white rounded-sm shadow-lg flex flex-col justify-center mt-10 py-8 ">
         <div class="top-0 w-auto flex mx-10">

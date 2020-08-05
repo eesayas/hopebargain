@@ -33,9 +33,20 @@ $('.calendar-cont').clndr({
                             
                             //configure number of companions per slot
                             $(this).attr('data-companions', data[`${index}`] - 1);
+                        
+                        } else{
+                            $(this).addClass('disabled-time');
                         }
-
                     });
+                }).done(function(){
+
+                    //reset on time slot value on new date
+                    $('.time-slot').removeClass('bg-hope text-white').addClass('bg-white text-hope');
+                    timeSubmission = null;
+                    timeIndexSubmission = null;
+
+                    $('#primary-contact').addClass('hidden');
+                    $('#buttons-cont').addClass('hidden');
                 });              
 
                 dateSubmission = date; //if slots are available
@@ -82,8 +93,6 @@ $('.time-slot').each(function(){
         $('#primary-contact').removeClass('hidden');
         $('#buttons-cont').removeClass('hidden');
 
-        updateCompanions();
-
         let primaryContact = document.getElementById('primary-contact');
         primaryContact.scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
     });
@@ -91,6 +100,7 @@ $('.time-slot').each(function(){
 
 $('form').submit(function(event){
     event.preventDefault();
+
     let submission = {};
 
     let formData = $('form').serializeArray();
@@ -117,8 +127,68 @@ $('form').submit(function(event){
     
     submission = {...submission, date: dateSubmission, time: timeSubmission, timeIndex: timeIndexSubmission, companions: companions};
 
-    console.log(submission);
-    $.post("/register", {data: JSON.stringify(submission)});
+    let approved = true; //if all necessary data is added
+
+    //check for empty inputs
+    $('.primary-contact-input').each(function(index){
+
+        if($(this).val() === ""){
+            $(this).addClass('border-red-500');
+            $('.empty-error').eq(index).removeClass('hidden');
+            approved = false;
+
+        } else{
+            $(this).removeClass('border-red-500');
+            $('.empty-error').eq(index).addClass('hidden');
+        }
+    });
+
+    if(approved) {
+        //show modal
+        $('#MODAL').removeClass('hidden');
+        $('#MODAL').removeClass('pointer-events-none');
+
+        $.post("/register", {data: JSON.stringify(submission)}, 
+        
+        //on success
+        function(data){
+            let date = new Date(parseInt(data.slot.date));
+
+            //if registation is successful
+            $('#MODAL-CONTENT').empty();
+            $('#MODAL-CONTENT').append(`
+                <div class="text-center text-green-600 font-bold text-3xl mx-10">You are booked successfully for ${moment(date).format('LL')} <br> at ${data.slot.time}</div>
+                <br>
+                <div class="flex mx-10">
+                <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-auto" href="/">
+                    OKAY
+                </a>
+                </div>
+            `);
+        })
+        
+        //on fail
+        .fail(function(data){
+
+            $('#MODAL-CONTENT').empty();
+            $('#MODAL-CONTENT').append(`
+                <div class="text-center text-red-600 font-bold text-3xl mx-10">${data.responseJSON.msg}</div>
+                <br>
+                <div class="flex mx-10">
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-auto" id="GO-BACK">
+                    GO BACK
+                </button>
+                </div>
+            `);
+
+            $('#GO-BACK').on('click', function(){
+                //hide modal
+                $('#MODAL').addClass('hidden');
+                $('#MODAL').addClass('pointer-events-none');
+            });
+        });
+    }
+    
 });
 
 //on user selecting 'not alone' checkbox
@@ -138,13 +208,13 @@ $('#companions').change(function(){
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-first-name">
                     COMPANION #1
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
                 </div>
                 <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-last-name">
                     &nbsp;
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
                 </div>
               </div>
             `
@@ -164,35 +234,48 @@ $('#companions').change(function(){
 });
 
 $('select').on('change', function(){
-    updateCompanions(); 
+    let formData = $('form').serializeArray();
+
+    let companionFirstNames = formData.filter(data => data.name === "companion-first-name[]");
+    let companionLastNames = formData.filter(data => data.name === "companion-last-name[]");
+
+    let companionData = [];
+    for(let i = 0; i < $('select').val(); i ++){
+        if(i < companionFirstNames.length){
+            companionData.push({firstName: companionFirstNames[i].value, lastName: companionLastNames[i].value});
+        } else{
+            companionData.push({firstName: "", lastName: ""});
+        }
+    }
+
+    updateCompanions(companionData); 
     let companionRecords = document.getElementById('companion-records');
     companionRecords.scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
 });
 
-const updateCompanions = () => {
+const updateCompanions = (arr) => {
 
     $('#companion-form').empty(); //clear companion forms first
 
-    let pop = $('select').val(); //pop => population (how many companions)
-    for(let i = 1; i <= pop; i++){
+    arr.forEach((slot, index) =>{
         $('#companion-form').append(
             `
             <div class="w-full sm:flex-row flex-col flex">
                 <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    COMPANION #${i}
+                    COMPANION #${index + 1}
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter First Name" name="companion-first-name[]">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter First Name" name="companion-first-name[]" value="${slot.firstName}">
                 </div>
                 <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                     &nbsp;
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter Last Name" name="companion-last-name[]" value="${slot.lastName}">
                 </div>
               </div>
               <br>
             `
         );
-    }
+    });
 }
