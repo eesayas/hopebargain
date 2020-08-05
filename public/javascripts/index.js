@@ -1,7 +1,6 @@
 //declare reacting elements
 let closeModal = document.getElementById('CLOSE-MODAL');
 let modal = document.getElementById('MODAL');
-// let bookTimeBtn = document.getElementById('BOOK-TIME-BUTTON');
 let registerBtn = document.getElementById('REGISTER-BUTTON');
 
 //when close icon in modal is clicked => close modal
