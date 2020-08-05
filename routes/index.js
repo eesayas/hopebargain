@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 const Slot = require('../models/slot');
+const passport = require('passport');
+const User = require('../models/user');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -9,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 /*
-@route  /register
+@route  GET /register
 @desc   Has the calendar the slot selections for booking also the form for contact info (in order)
 @access Public
 */
@@ -18,7 +20,7 @@ router.get('/register', (req, res) => {
 });
 
 /*
-@route  /register
+@route  POST /register
 @desc   Register time slot
 @access Public
 */
@@ -38,7 +40,7 @@ router.post('/register', async (req, res) => {
 })
 
 /*
-@route  /available/:date
+@route  GET /available/:date
 @desc   Get all available slots given a time, date is in milliseconds
 @access Public
 */
@@ -62,5 +64,39 @@ router.get('/available/:date', async (req, res) => {
   
 });
 
+/*
+@route  POST /adduser
+@desc   Register a user (MUST BE COMMENTED OUT AFTER USER CREATION)
+@access Public
+*/
+router.post('/adduser', async (req, res) => {
+  const newUser = new User({
+    username: req.body.username,
+  });
+
+  await User.register(newUser, req.body.password);
+  res.send(`${req.body.username} successfully registered`);
+});
+
+/*
+@route  GET /login
+@desc   This is the login form for admin
+@access Public
+*/
+router.get('/login', (req, res) => {
+  res.render('login', { title: 'Hope Bargain Shoppe - Login' })
+});
+
+/*
+@route  POST /login
+@desc   This log ins a user
+@access Public
+*/
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/admin',
+    failureRedirect: '/login'
+  }) (req, res, next);
+});
 
 module.exports = router;

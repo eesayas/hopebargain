@@ -1,14 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const Slot = require('../models/slot');
-const e = require('express');
+
+/*
+@desc This is a middleware for logged in
+*/
+const isLoggedIn = (req, res, next) => {
+  if(req.isAuthenticated()) return next();
+	res.redirect('/login');
+}
 
 /*
 @route  /admin
 @desc   Displays all slots
 @access Private
 */
-router.get('/', async (req, res) => {
+router.get('/', isLoggedIn, async(req, res) => {
   try{
     const slots = await Slot.find({});
     if(!slots) throw Error('Slots do not exists');
@@ -24,7 +31,7 @@ router.get('/', async (req, res) => {
 @desc   Update a slot via slot id
 @access Private
 */
-router.post('/:slot_id', async(req, res) => {
+router.post('/:slot_id', isLoggedIn, async(req, res) => {
   const data = JSON.parse(req.body.data);
 
   try{
