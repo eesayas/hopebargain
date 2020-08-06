@@ -17,7 +17,7 @@ const isLoggedIn = (req, res, next) => {
 */
 router.get('/', isLoggedIn, async(req, res) => {
   try{
-    const slots = await Slot.find({});
+    const slots = await Slot.find({}).sort({date: 1}).sort({timeIndex: 1});
     if(!slots) throw Error('Slots do not exists');
 
     res.render('admin', {slots, title: "Hope Bargain Shoppe - Slots"});
