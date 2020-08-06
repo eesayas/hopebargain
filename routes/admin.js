@@ -53,4 +53,22 @@ router.post('/:slot_id', isLoggedIn, async(req, res) => {
   }
 });
 
+/*
+@route  DELETE /admin/:slot_id
+@desc   Delete a time slot
+@access Private
+*/
+router.delete('/:slot_id', isLoggedIn, async(req, res) => {
+  try{
+    const slot = await Slot.findById(req.params.slot_id);
+    if(!slot) throw Error('Slot does not exist (DELETE ROUTE)');
+
+    const removed = await slot.remove();
+    if(!removed) throw Error('Something went wrong while deleting a slot');
+    res.status(200).json({success: true});
+  } catch(e){
+    res.status(400).json({msg: e.message, success: false});
+  }
+});
+
 module.exports = router;

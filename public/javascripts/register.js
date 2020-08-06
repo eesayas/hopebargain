@@ -208,13 +208,13 @@ $('#companions').change(function(){
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-first-name">
                     COMPANION #1
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
                 </div>
                 <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-last-name">
                     &nbsp;
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
                 </div>
               </div>
             `
@@ -265,13 +265,13 @@ const updateCompanions = (arr) => {
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                     COMPANION #${index + 1}
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter First Name" name="companion-first-name[]" value="${slot.firstName}">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter First Name" name="companion-first-name[]" value="${slot.firstName}">
                 </div>
                 <div class="w-full sm:w-1/2 px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                     &nbsp;
                   </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter Last Name" name="companion-last-name[]" value="${slot.lastName}">
+                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Enter Last Name" name="companion-last-name[]" value="${slot.lastName}">
                 </div>
               </div>
               <br>
@@ -279,3 +279,14 @@ const updateCompanions = (arr) => {
         );
     });
 }
+
+//on agree
+$('#AGREE').on('change', function(){
+    if($('#AGREE').prop('checked')){
+        $('#SUBMIT-BTN').removeAttr('disabled');
+        $('#SUBMIT-BTN').removeClass('disabled-time');
+    } else{
+        $('#SUBMIT-BTN').addClass('disabled-time');
+        $('#SUBMIT-BTN').attr('disabled', true);
+    }
+});

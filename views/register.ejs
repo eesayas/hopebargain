@@ -73,14 +73,14 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="first-name">
                   First Name
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="first-name" type="text" placeholder="Enter First Name" name="firstName">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="first-name" type="text" placeholder="Enter First Name" name="firstName">
                 <p class="hidden text-red-500 text-xs italic empty-error">Enter first name</p>
               </div>
               <div class="w-full sm:w-1/2 px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="last-name">
                   Last Name
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="last-name" type="text" placeholder="Enter Last Name" name="lastName">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="last-name" type="text" placeholder="Enter Last Name" name="lastName">
                 <p class="hidden text-red-500 text-xs italic empty-error">Enter last name</p>
               </div>
             </div>
@@ -90,7 +90,7 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="phone-number">
                   Phone Number
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="phone-number" type="text" placeholder="Enter Phone Number" name="phoneNumber">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 primary-contact-input" id="phone-number" type="text" placeholder="Enter Phone Number" name="phoneNumber">
                 <p class="hidden text-red-500 text-xs italic empty-error">Enter phone number</p>
               </div>
               <br>
@@ -98,7 +98,7 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email-address">
                   Email Address <span>(optional)</span>
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email-address" type="text" placeholder="Enter Email Address (optional)" name="emailAddress">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email-address" type="text" placeholder="Enter Email Address (optional)" name="emailAddress">
               </div>
               <br>
               <label class="text-gray-700 px-3">
@@ -118,7 +118,7 @@
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Select Number of Companions
               </label>
-              <select class="block bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" style="border: 1px solid #9e9e9e">
+              <select class="block bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 border border-gray-500">
                 <!-- ADD NUMBER OF COMPANIONS HERE -->
               </select>
             </div>
@@ -127,13 +127,38 @@
             </div>
           </div>
           <br>
-          <div class="flex px-3 justify-end hidden" id="buttons-cont">
-            <button class="bg-transparent hover:bg-hope text-hope font-semibold hover:text-white py-2 px-4 border border-hope hover:border-transparent rounded mr-3">
-              SUBMIT
-            </button>
-            <a href="/" class="bg-transparent hover:bg-gray-700 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded">
-              CANCEL
-            </a>
+          <div class="px-3 justify-end hidden" id="buttons-cont">
+            <div>
+              <p class="font-semibold my-2">Before shopping, please take note of the following:</p>
+              <ol>
+                <li><span class="font-medium mr-2">1.</span>Fitting rooms and washrooms will not be available.</li>
+                <li><span class="font-medium mr-2">2.</span>No food allowed.</li>
+                <li><span class="font-medium mr-2">3.</span>Customers will be screened - temperature check, hand and footwear sanitation.</li>
+                <li><span class="font-medium mr-2">4.</span>Face mask is required.</li>
+                <li><span class="font-medium mr-2">5.</span>Gloves and personal cloth bags not allowed.</li>
+                <li><span class="font-medium mr-2">6.</span>Card payments only.</li>
+                <li><span class="font-medium mr-2">7.</span>No holds, exchanges, returns, refunds at this time.</li>
+              </ol>
+              <div class="my-2">
+                <label>
+                  <input class="mr-2 leading-tight" type="checkbox" id="AGREE">
+                  <span>
+                    I agree
+                  </span>
+                </label>
+              </div>
+              
+            </div>
+            <br>
+            <div class="flex">
+              <button disabled class="disabled-time bg-transparent hover:bg-hope text-hope font-semibold hover:text-white py-2 px-4 border border-hope hover:border-transparent rounded mr-3" id="SUBMIT-BTN">
+                SUBMIT
+              </button>
+              <a href="/" class="bg-transparent hover:bg-gray-700 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded">
+                CANCEL
+              </a>
+            </div>
+            
           </div>
         </form>   
         <br>     

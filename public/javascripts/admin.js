@@ -53,13 +53,13 @@ const updateCompanions = (arr) => {
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-first-name">
                             COMPANION #${index+1}
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index+1}-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]" value="${slot.firstName}">
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index+1}-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]" value="${slot.firstName}">
                         </div>
                         <div class="w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-last-name">
                             &nbsp;
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index+1}-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]" value="${slot.lastName}">
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index+1}-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]" value="${slot.lastName}">
                         </div>
                     </div>
                     
@@ -82,13 +82,13 @@ $('#ADD-COMP').on('click', function(){
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-first-name">
                         COMPANION #${index}
                         </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index}-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index}-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
                     </div>
                     <div class="w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-last-name">
                         &nbsp;
                         </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index}-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-${index}-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
                     </div>
                 </div>
                 
@@ -170,4 +170,10 @@ $('form').submit(function(event){
 $('#CLOSE-MODAL').on('click', function(){
     $('#MODAL').addClass('hidden');
     $('#MODAL').addClass('pointer-events-none');
+});
+
+$('#DELETE-BTN').on('click', function(){
+    $.ajax({url: `/admin/${slotValue._id}`, method: "DELETE"}).then(function(data){
+        if(data.success) window.location.href = "/admin";
+    });
 });
