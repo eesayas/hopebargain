@@ -85,7 +85,7 @@ $('.time-slot').each(function(){
         $('select').empty(); //clear options first
 
         //set value of companions applicable
-        for(let i = 1; i <= numberOfCompanions; i ++){
+        for(let i = 1; i <= parseInt(numberOfCompanions); i ++){
             $('select').append(`<option>${i}</option>`);
         }
 
@@ -196,29 +196,36 @@ $('#companions').change(function(){
     
     //if customer is not alone
     if($('#companions').prop('checked')){
+        
+        if(parseInt(numberOfCompanions) !== 0){
+            $('select').val(1);
+            $('#companion-form').empty();
 
-        $('select').val(1);
-        $('#companion-form').empty();
-
-        //append companion form 
-        $('#companion-form').append(
-            `
-            <div class="w-full sm:flex-row flex-col flex">
-                <div class="w-full sm:w-1/2 px-3">
-                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-first-name">
-                    COMPANION #1
-                  </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
+            //append companion form 
+            $('#companion-form').append(
+                `
+                <div class="w-full sm:flex-row flex-col flex">
+                    <div class="w-full sm:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-first-name">
+                        COMPANION #1
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-first-name" type="text" placeholder="Enter First Name" name="companion-first-name[]">
+                    </div>
+                    <div class="w-full sm:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-last-name">
+                        &nbsp;
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
+                    </div>
                 </div>
-                <div class="w-full sm:w-1/2 px-3">
-                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="companion-last-name">
-                    &nbsp;
-                  </label>
-                  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="companion-1-last-name" type="text" placeholder="Enter Last Name" name="companion-last-name[]">
-                </div>
-              </div>
-            `
-        );
+                `
+            );
+        } else{
+            $('#companion-records').empty();
+            $('#companion-records').append(`
+                <div class="text-center text-3xl text-hope">Sorry, there are no more spots for your companions</div>
+            `)
+        }
 
         //show companions info form
         $('#companion-records').removeClass('hidden');
