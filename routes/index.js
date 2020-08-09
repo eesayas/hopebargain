@@ -28,7 +28,7 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
   const data = JSON.parse(req.body.data);
   try{
-    const slots = await Slot.find({date: data.date, firstName: data.firstName, lastName: data.lastName, phoneNumber: data.phoneNumber});
+    const slots = await Slot.find({date: data.date, firstName: { $regex : new RegExp(data.firstName, "i")} , lastName: { $regex : new RegExp(data.lastName, "i")} });;
     if(slots.length) throw Error("You can't book multiple slots on the same day");
     
     const slot = await Slot.create(data);
@@ -70,7 +70,7 @@ router.get('/available/:date', async (req, res) => {
 @route  POST /adduser
 @desc   Register a user (MUST BE COMMENTED OUT AFTER USER CREATION)
 @access Public
-*/
+
 router.post('/adduser', async (req, res) => {
   const newUser = new User({
     username: req.body.username,
@@ -79,6 +79,7 @@ router.post('/adduser', async (req, res) => {
   await User.register(newUser, req.body.password);
   res.send(`${req.body.username} successfully registered`);
 });
+*/
 
 /*
 @route  GET /login
