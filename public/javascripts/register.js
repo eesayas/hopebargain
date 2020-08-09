@@ -71,6 +71,11 @@ $('.calendar-cont').clndr({
 $('.time-slot').each(function(){
     $(this).on('click', function() {
 
+        //rehide companion form
+        $('#companions').prop('checked', false);
+        $('#companion-records').addClass('hidden');
+        
+
         //add indicator to selected time slot
         $('.time-slot').removeClass('bg-hope text-white').addClass('bg-white text-hope');
         $(this).removeClass('bg-white text-hope').addClass('bg-hope text-white');
@@ -80,14 +85,14 @@ $('.time-slot').each(function(){
         timeIndexSubmission = $(this).attr('data-index');
 
         //assign value for number of companions available (if user choose to include)
-        numberOfCompanions = $(this).attr('data-companions');
+        numberOfCompanions = parseInt($(this).attr('data-companions'));
 
         $('select').empty(); //clear options first
 
         //set value of companions applicable
-        for(let i = 1; i <= parseInt(numberOfCompanions); i ++){
-            $('select').append(`<option>${i}</option>`);
-        }
+        // for(let i = 1; i <= numberOfCompanions; i ++){
+        //     $('select').append(`<option>${i}</option>`);
+        // }
 
         //show primary contact form
         $('#primary-contact').removeClass('hidden');
@@ -196,8 +201,37 @@ $('#companions').change(function(){
     
     //if customer is not alone
     if($('#companions').prop('checked')){
+        console.log(numberOfCompanions);
         
-        if(parseInt(numberOfCompanions) !== 0){
+        if(numberOfCompanions !== 0){
+            //reset
+            $('#companion-records').empty();
+            $('#companion-records').append(`
+                <div class="text-center text-3xl text-hope">Add Companion(s) Info</div>
+                <br>
+                <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Select Number of Companions
+                </label>
+                <select class="block bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 border border-gray-500">
+                    <!-- ADD NUMBER OF COMPANIONS HERE -->
+                </select>
+                </div>
+                <div id="companion-form">
+                <!--add companion forms here-->
+                </div>
+            `);
+
+            $('select').empty(); //clear options first
+
+            //set value of companions applicable
+            for(let i = 1; i <= numberOfCompanions; i ++){
+                $('select').append(`<option>${i}</option>`);
+            }
+
+            selectListener();
+
+
             $('select').val(1);
             $('#companion-form').empty();
 
@@ -240,25 +274,29 @@ $('#companions').change(function(){
     }
 });
 
-$('select').on('change', function(){
-    let formData = $('form').serializeArray();
+const selectListener = () => {
 
-    let companionFirstNames = formData.filter(data => data.name === "companion-first-name[]");
-    let companionLastNames = formData.filter(data => data.name === "companion-last-name[]");
+    $('select').on('change', function(){
+        let formData = $('form').serializeArray();
 
-    let companionData = [];
-    for(let i = 0; i < $('select').val(); i ++){
-        if(i < companionFirstNames.length){
-            companionData.push({firstName: companionFirstNames[i].value, lastName: companionLastNames[i].value});
-        } else{
-            companionData.push({firstName: "", lastName: ""});
+        let companionFirstNames = formData.filter(data => data.name === "companion-first-name[]");
+        let companionLastNames = formData.filter(data => data.name === "companion-last-name[]");
+
+        let companionData = [];
+        for(let i = 0; i < $('select').val(); i ++){
+            if(i < companionFirstNames.length){
+                companionData.push({firstName: companionFirstNames[i].value, lastName: companionLastNames[i].value});
+            } else{
+                companionData.push({firstName: "", lastName: ""});
+            }
         }
-    }
 
-    updateCompanions(companionData); 
-    let companionRecords = document.getElementById('companion-records');
-    companionRecords.scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
-});
+        updateCompanions(companionData); 
+        let companionRecords = document.getElementById('companion-records');
+        companionRecords.scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
+    });
+
+}
 
 const updateCompanions = (arr) => {
 
