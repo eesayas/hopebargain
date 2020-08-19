@@ -1,3 +1,4 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -14,7 +15,7 @@ const adminRouter = require('./routes/admin');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/hopebargain', {
+mongoose.connect(`mongodb://${process.env.MONGOUSER}:${process.env.MONGOPWD}@localhost:47363/hopebargain`, {
   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
 });
 
