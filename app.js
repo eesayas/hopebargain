@@ -15,7 +15,7 @@ const adminRouter = require('./routes/admin');
 
 const app = express();
 
-mongoose.connect(`mongodb://${process.env.MONGOUSER}:${process.env.MONGOPWD}@localhost:47363/hopebargain`, {
+mongoose.connect(`mongodb://localhost:27017/hopebargain`, {
   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
 });
 

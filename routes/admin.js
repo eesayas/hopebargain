@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Slot = require('../models/slot');
+const _ = require('lodash');
 
 /*
 @desc This is a middleware for logged in
@@ -17,10 +18,18 @@ const isLoggedIn = (req, res, next) => {
 */
 router.get('/', isLoggedIn, async(req, res) => {
   try{
-    const slots = await Slot.find({}).sort({date: 1}).sort({timeIndex: 1});
+    let dateNow = new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()).getTime();
+
+    const slots = await Slot.find(
+      { $expr: { $gte: [ { $toLong: "$date"}, dateNow ]}} //do not return passed days
+      ).sort({date: 1}).sort({timeIndex: 1});
+      
     if(!slots) throw Error('Slots do not exists');
 
-    res.render('admin', {slots, title: "Hope Bargain Shoppe - Slots"});
+    //group slots into their dates
+    const grouped = _.groupBy(slots, 'date');
+
+    res.render('admin', {slots, grouped, title: "Hope Bargain Shoppe - Slots"});
   } catch(e){
     res.status(400).json({msg: e.message});
   }

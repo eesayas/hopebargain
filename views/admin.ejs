@@ -25,6 +25,47 @@
     <% include ./navbar-admin %>
     <div class="bg-white">
         <br>
+        <div style="width: 95%; margin: 0 auto;" class="flex">
+          <div class="flex select-none">
+            <div class="table my-auto material-icons cursor-pointer">calendar_today</div>&nbsp;&nbsp;
+            <div class="table my-auto">Today is August 22</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="table my-auto material-icons cursor-pointer">save_alt</div>&nbsp;&nbsp;
+            <div class="table my-auto">Export as Excel Spreadsheet</div>
+          </div>
+          <div style="margin-left: auto;" class="flex">
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-500 py-2 px-4 pr-20 block w-full appearance-none leading-normal" type="text" placeholder="Search">&nbsp;&nbsp;
+          </div>
+        </div>
+        <br>
+        <div class="text-center text-3xl text-hope">August 22 2020</div>
+        <br>
+        <table style="width: 98%; margin: 0 auto;">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Companions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% slots.forEach(slot => { %>
+                    <tr class="cursor-pointer SLOT" data-value="<%=JSON.stringify(slot)%>">
+                        <td class="dates text-transparent"><%=slot.date%></td>
+                        <td><%=slot.time%></td>
+                        <td><%=slot.firstName + ' ' + slot.lastName%></td>
+                        <td><%=slot.phoneNumber%></td>
+                        <td class="<%=!slot.emailAddress ? 'text-gray-800 italic' : 'text-black not-italic'%>"><%=slot.emailAddress ? slot.emailAddress : 'not provided'%></td>
+                        <td><%=slot.companions.length%> companion(s)</td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <br>
+        <div class="text-center text-3xl text-hope">August 22 2020</div>
+        <br>
         <table style="width: 98%; margin: 0 auto;">
             <thead>
                 <tr>
