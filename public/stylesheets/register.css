@@ -37,10 +37,10 @@
     cursor: pointer;
 }
 
-/* .past, .calendar-dow-0, .calendar-dow-6{
+.past, .calendar-dow-0, .calendar-dow-6{
     pointer-events: none;
     color: #969696;
-} */
+}
 
 .day{
     text-align: center;

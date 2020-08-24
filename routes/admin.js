@@ -18,12 +18,15 @@ const isLoggedIn = (req, res, next) => {
 */
 router.get('/', isLoggedIn, async(req, res) => {
   try{
-    let dateNow = new Date().getTime();
+    let dateNow = new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()).getTime();
 
     if(req.query.date){
       let date = new Date(parseInt(req.query.date));
       dateNow = date.getTime();
+      console.log("hey");
     }
+
+    console.log(dateNow);
     
 
     const slots = await Slot.find(
