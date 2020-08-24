@@ -177,3 +177,20 @@ $('#DELETE-BTN').on('click', function(){
         if(data.success) window.location.href = "/admin";
     });
 });
+
+$('#CAL-REPORT').on('click', function(){
+    $('#CAL-CONT').removeClass('hidden');
+    $('#CAL-CONT').removeClass('pointer-events-none');
+});
+
+var urlParams = new URLSearchParams(window.location.search);
+
+if(urlParams.has("date")){
+    let date = new Date(parseInt(urlParams.get('date')));
+    $('#DATE-LABEL').text(`Report as of ${moment(date).format('LL')}`);
+    $('#DATE-LABEL').removeClass("text-transparent");
+
+} else if(!urlParams.has("date")){
+    $('#DATE-LABEL').text(`Today is ${moment().format('LL')}`);
+    $('#DATE-LABEL').removeClass("text-transparent");
+}

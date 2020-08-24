@@ -37,10 +37,10 @@
     cursor: pointer;
 }
 
-.past, .calendar-dow-0, .calendar-dow-6{
+/* .past, .calendar-dow-0, .calendar-dow-6{
     pointer-events: none;
     color: #969696;
-}
+} */
 
 .day{
     text-align: center;
@@ -48,9 +48,9 @@
 }
 
 .select-day{
-    background: #ec6715;
-    color: white;
-    border-radius: 50%;
+    background: #ec6715 !important;
+    color: white !important;
+    border-radius: 50% !important;
 }
 
 .day-inner{

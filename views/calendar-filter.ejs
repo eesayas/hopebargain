@@ -1,0 +1,43 @@
+<div class="hidden pointer-events-none absolute w-full h-full flex justify-center top-0 left-0" id="CAL-CONT">
+    <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+    </div>
+    <div class="absolute md:w-1/2 sm:w-3/4 h-auto bg-white rounded-sm shadow-lg flex flex-col justify-center mt-10 py-8">
+        <div class="calendar-cont"></div>
+        <script id="calendar-template" type="text/template">
+            <div class="clndr-cont" id="clndr-cont">
+              <div class="clndr-controls">
+                <div class="clndr-previous-button material-icons">chevron_left</div>
+                <div class="month">{{ month }} {{ year }}</div>
+                <div class="clndr-next-button material-icons">chevron_right</div>
+              </div>
+              <div class="clndr-grid">
+                <div class="days-of-the-week">
+                  <div class="header-cont">
+                    {% _.each(daysOfTheWeek, function (day) { %}
+                      <div class="header-day">{{ day }}</div>
+                    {% }) %}
+                  </div>
+                  <div class="days">
+                  {% _.each(days, function (day) { %}
+                    <div class="{{ day.classes }}">
+                      <div class="day-inner">{{ day.day }}</div>
+                    </div>
+                  {% }) %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </script>
+          <button type="button" class="bg-hope hover:bg-opacity-75 text-white font-semibold py-2 px-4 border border-hope hover:border-transparent rounded mx-12" id="VIEW-REPORT">
+            VIEW REPORT
+          </button>
+          <br>
+          <button type="button" class="bg-gray-500 hover:bg-opacity-75 text-white font-semibold py-2 px-4 border border-gray-500 hover:border-opacity-75 rounded mx-12" id="CANCEL-REPORT">
+            CANCEL
+          </button>
+    </div>
+    
+</div>
+
+<script type="text/javascript" src="/javascripts/calendar-filter.js"></script>

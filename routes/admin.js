@@ -18,7 +18,13 @@ const isLoggedIn = (req, res, next) => {
 */
 router.get('/', isLoggedIn, async(req, res) => {
   try{
-    let dateNow = new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()).getTime();
+    let dateNow = new Date().getTime();
+
+    if(req.query.date){
+      let date = new Date(parseInt(req.query.date));
+      dateNow = date.getTime();
+    }
+    
 
     const slots = await Slot.find(
       { $expr: { $gte: [ { $toLong: "$date"}, dateNow ]}} //do not return passed days
@@ -29,7 +35,7 @@ router.get('/', isLoggedIn, async(req, res) => {
     //group slots into their dates
     const grouped = _.groupBy(slots, 'date');
 
-    res.render('admin', {slots, grouped, title: "Hope Bargain Shoppe - Slots"});
+    res.render('admin', {raw: slots, grouped, title: "Hope Bargain Shoppe - Slots"});
   } catch(e){
     res.status(400).json({msg: e.message});
   }
