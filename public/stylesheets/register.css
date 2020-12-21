@@ -37,7 +37,7 @@
     cursor: pointer;
 }
 
-.past, .calendar-dow-0, .calendar-dow-6{
+.past, .calendar-dow-0, .calendar-dow-6, .calendar-day-2020-09-07{
     pointer-events: none;
     color: #969696;
 }
