@@ -38,13 +38,7 @@ $('.calendar-cont').clndr({
                             //configure number of companions per slot
                             $(this).attr('data-companions', data[`${index}`] - 1);
                         
-<<<<<<< HEAD
                         } 
-=======
-                        } else if(index == 4){
-                            $(this).addClass('disabled-time');
-                        }
->>>>>>> 78fa7ee0ae040bbe50089f6598536722eb168f66
                         
                         else{
                             $(this).addClass('disabled-time');
