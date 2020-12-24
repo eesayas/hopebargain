@@ -58,7 +58,7 @@ router.get('/available/:date', async (req, res) => {
     for(let i = 0; i < 5; i++){
       if(!timeSlots[`${i}`] && timeSlots[`${i}`] !== 0) timeSlots[`${i}`] = 6;
     }
-
+    // console.log(timeSlots);
     res.status(200).json(timeSlots);
   } catch(e){
     res.status(400).json({msg: e.message});

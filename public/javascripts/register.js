@@ -26,15 +26,21 @@ $('.calendar-cont').clndr({
                 let date = target.date._d.getTime();
 
                 $.get(`/available/${date}`, function(data){
+                    
                     $('.time-slot').each(function(index){
-                        if(data[`${index}`] > 0) {
+                        if(index > 1){
+                            $(this).addClass('disabled-time');
+                        }
+                        else if(data[`${index}`] > 0) {
                             //make slots available if there are spots left
                             $(this).removeClass('disabled-time').removeAttr('disabled');
                             
                             //configure number of companions per slot
                             $(this).attr('data-companions', data[`${index}`] - 1);
                         
-                        } else{
+                        } 
+                        
+                        else{
                             $(this).addClass('disabled-time');
                         }
                     });
