@@ -46,10 +46,10 @@
 }
 
 .day{
-    	pointer-events: none !important;
-	color: #969696 !important;
+    /* pointer-events: none !important; */
+	/* color: #969696 !important; */
 	text-align: center;
-    	margin: 0.8rem 0;
+    margin: 0.8rem 0;
 }
 
 .select-day{

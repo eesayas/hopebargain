@@ -27,24 +27,16 @@ $('.calendar-cont').clndr({
 
                 $.get(`/available/${date}`, function(data){
                     
-                    $('.time-slot').each(function(index){
-                       /**
-			 if(index > 1){
-                            $(this).addClass('disabled-time');
-                        }
-                        else if(data[`${index}`] > 0) {
+                    $('.time-slot').each(function(index){        
+			            if(data[`${index}`] > 0) {
                             //make slots available if there are spots left
                             $(this).removeClass('disabled-time').removeAttr('disabled');
                             
                             //configure number of companions per slot
                             $(this).attr('data-companions', data[`${index}`] - 1);
-                        
-                        } 
-                        else{                            
-				$(this).addClass('disabled-time');
+                        } else{                            
+				            $(this).addClass('disabled-time');
                         }
-			*/
-			$(this).addClass('disabled-time');
                     });
                 }).done(function(){
 
