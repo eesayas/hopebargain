@@ -28,7 +28,8 @@ $('.calendar-cont').clndr({
                 $.get(`/available/${date}`, function(data){
                     
                     $('.time-slot').each(function(index){
-                        if(index > 1){
+                       /**
+			 if(index > 1){
                             $(this).addClass('disabled-time');
                         }
                         else if(data[`${index}`] > 0) {
@@ -39,10 +40,11 @@ $('.calendar-cont').clndr({
                             $(this).attr('data-companions', data[`${index}`] - 1);
                         
                         } 
-                        
-                        else{
-                            $(this).addClass('disabled-time');
+                        else{                            
+				$(this).addClass('disabled-time');
                         }
+			*/
+			$(this).addClass('disabled-time');
                     });
                 }).done(function(){
 
