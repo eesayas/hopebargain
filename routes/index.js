@@ -53,10 +53,10 @@ router.get('/available/:date', async (req, res) => {
 
     //group all slots via timeIndex
     const timeSlots = _.mapValues(_.groupBy(slots, 'timeIndex'), slotlist => 
-      6 - slotlist.map(people => people.companions.length + 1).reduce((accumulator, currentValue) => accumulator + currentValue)); //take note that companions should count
+      5 - slotlist.map(people => people.companions.length + 1).reduce((accumulator, currentValue) => accumulator + currentValue)); //take note that companions should count
     
     for(let i = 0; i < 5; i++){
-      if(!timeSlots[`${i}`] && timeSlots[`${i}`] !== 0) timeSlots[`${i}`] = 6;
+      if(!timeSlots[`${i}`] && timeSlots[`${i}`] !== 0) timeSlots[`${i}`] = 5;
     }
     // console.log(timeSlots);
     res.status(200).json(timeSlots);
