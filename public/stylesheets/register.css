@@ -41,8 +41,7 @@
 .calendar-day-2020-12-25, .calendar-day-2020-12-26, .calendar-day-2020-12-27, 
 .calendar-day-2020-12-28, .calendar-day-2020-12-29, .calendar-day-2020-12-30, 
 .calendar-day-2020-12-31, .calendar-day-2021-01-01, .calendar-day-2021-02-15,
-.calendar-day-2021-04-02
-{
+.calendar-day-2021-04-02, .calendar-day-2021-05-24{
     pointer-events: none;
     color: #969696;
 }
